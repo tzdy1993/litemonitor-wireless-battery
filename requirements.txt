@@ -1,0 +1,2 @@
+# 运行依赖 (hid_win.py 使用纯 Windows 原生 ctypes 实现，零 C++ 编译与第三方驱动依赖)
+websocket-client>=1.6.0

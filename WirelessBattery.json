@@ -1,0 +1,55 @@
+{
+  "id": "WirelessBattery",
+  "meta": {
+    "name": "无线外设双电量 (鼠标/耳机)",
+    "version": "1.0",
+    "author": "Antigravity",
+    "description": "实时监控英菲克无线鼠标与漫步者花再耳机电量，支持上下分行与 Emoji 图标显示"
+  },
+  "inputs": [],
+  "execution": {
+    "type": "chain",
+    "interval": 5,
+    "steps": [
+      {
+        "id": "get_battery",
+        "url": "http://127.0.0.1:28888/battery",
+        "response_format": "json",
+        "extract": {
+          "m_lvl": "mouse_level",
+          "h_lvl": "headset_level",
+          "m_col": "mouse_color",
+          "h_col": "headset_color",
+          "m_chg": "mouse_charging",
+          "h_chg": "headset_charging"
+        }
+      }
+    ]
+  },
+  "outputs": [
+    {
+      "key": "mouse",
+      "label": "🖱️",
+      "short_label": "M",
+      "format_val": "{{m_lvl}}",
+      "unit": "%",
+      "color": "{{m_col}}"
+    },
+    {
+      "key": "headset",
+      "label": "🎧",
+      "short_label": "H",
+      "format_val": "{{h_lvl}}",
+      "unit": "%",
+      "color": "{{h_col}}"
+    },
+    {
+      "key": "combined",
+      "label": "外设",
+      "short_label": "B",
+      "format_val": "🖱️{{m_lvl}}% 🎧{{h_lvl}}%",
+      "unit": "",
+      "color": "{{m_col}}"
+    }
+  ]
+}
